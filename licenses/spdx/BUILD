@@ -38,6 +38,7 @@
 # If you maintain your own  third_party directory of all your dependences,
 # so that your WORKSPACE files are empty, you might favor the second.
 
+package(default_visibility = ["//visibility:public"])
 
 load("@rules_license//rules:license_kind.bzl", "license_kind")
 

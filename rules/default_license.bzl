@@ -27,6 +27,9 @@ load(
 
 def _default_licenses_impl(ctx):
     licenses = []
+    for dep in ctx.attr.data:
+        if LicenseInfo in dep:
+            licenses.append(dep[LicenseInfo])
     for dep in ctx.attr.deps:
         if LicenseInfo in dep:
             licenses.append(dep[LicenseInfo])

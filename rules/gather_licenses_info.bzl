@@ -44,6 +44,8 @@ def _gather_licenses_info_impl(target, ctx):
     trans = []
     if hasattr(ctx.rule.attr, "applicable_licenses"):
         _get_transitive_licenses(ctx.rule.attr.applicable_licenses, licenses, trans)
+    if hasattr(ctx.rule.attr, "data"):
+        _get_transitive_licenses(ctx.rule.attr.data, licenses, trans)
     if hasattr(ctx.rule.attr, "deps"):
         _get_transitive_licenses(ctx.rule.attr.deps, licenses, trans)
     if hasattr(ctx.rule.attr, "srcs"):
@@ -53,7 +55,7 @@ def _gather_licenses_info_impl(target, ctx):
 gather_licenses_info = aspect(
     doc = """Collects LicenseInfo providers into a single LicensesInfo provider.""",
     implementation = _gather_licenses_info_impl,
-    attr_aspects = ["applicable_licenses", "deps", "srcs"],
+    attr_aspects = ["applicable_licenses", "data", "deps", "srcs"],
 )
 
 def write_licenses_info(ctx, deps, json_out):
